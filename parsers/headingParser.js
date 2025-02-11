@@ -1,5 +1,5 @@
 // headingParser.js
-import Token from './token.js'
+import Token from '../token.js'
 
 function createHeadingToken(type, level, content = '') {
   // 判断开标签还是闭标签来决定 tag

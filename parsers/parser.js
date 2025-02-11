@@ -1,5 +1,5 @@
 // parser.js
-import Token from './token.js'
+import Token from '../token.js'
 import { parseHeadings } from './headingParser.js'
 import { parseParagraphs } from './paragraphParser.js'
 import { createListParser } from './listParser.js'

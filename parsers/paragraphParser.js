@@ -1,5 +1,5 @@
 // paragraphParser.js
-import Token from './token.js'
+import Token from '../token.js'
 
 export function parseParagraphs(str) {
   const tokens = []

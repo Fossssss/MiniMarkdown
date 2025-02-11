@@ -1,4 +1,4 @@
-import Token from './token.js'
+import Token from '../token.js'
 // listParser.js
 export function createListParser() {
   let listStack = [] // 保存当前列表层级信息 { indent: number, type: 'ul'|'ol' }
@@ -6,7 +6,7 @@ export function createListParser() {
 
   function calculateIndent(line) {
     const indentStr = line.match(/^\s*/)[0]
-    return indentStr.replace(/\t/g, '    ').length
+    return indentStr.replace(/\t/g, '    ').length //如果有制表符则统一为四个空格
   } //计算缩进
 
   function generateListTokens(type, action, level) {
@@ -23,7 +23,7 @@ export function createListParser() {
       }),
     )
   }
-
+  //解析列表项
   function parseListItem(line) {
     const text = line.replace(/^\s*[\*\-+]|\d+\.\s*/, '').trim()
     const tokens = []
@@ -39,10 +39,11 @@ export function createListParser() {
 
   return {
     parseLine(line) {
+      //判断是否为列表
       const listMatch = line.match(/^(\s*)([\*\-+]|\d+\.)\s/)
       if (!listMatch) return null
-
       const indent = calculateIndent(line)
+      //判断有序表/无序表
       const listType = /\d/.test(listMatch[2]) ? 'ol' : 'ul'
       const output = []
 
@@ -75,6 +76,7 @@ export function createListParser() {
       // 处理根列表
       if (listStack.length === 0) {
         generateListTokens(listType, 'open', 0)
+        //压表入栈
         listStack.push({ indent, type: listType })
       }
 
