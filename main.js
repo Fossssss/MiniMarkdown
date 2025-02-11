@@ -1,5 +1,5 @@
 // main.js
-import { parseMarkdown } from './parser.js'
+import { parseMarkdown } from './parsers/parser.js'
 import { render } from './renders/render.js'
 const text = `- Item 1`
 
