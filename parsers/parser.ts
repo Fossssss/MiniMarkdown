@@ -1,10 +1,10 @@
 // parser.js
-import Token from '../token.js'
-import { parseHeadings } from './headingParser.js'
-import { parseParagraphs } from './paragraphParser.js'
-import { createListParser } from './listParser.js'
+import Token from '../token'
+import { parseHeadings } from './headingParser'
+import { parseParagraphs } from './paragraphParser'
+import { createListParser } from './listParser'
 
-export function parseMarkdown(str) {
+export function parseMarkdown(str: string) {
   const tokens = []
   const lines = str.split('\n')
   const listParser = createListParser()

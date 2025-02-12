@@ -1,15 +1,19 @@
-import Token from '../token.js'
+import Token from '../token'
 // listParser.js
 export function createListParser() {
-  let listStack = [] // 保存当前列表层级信息 { indent: number, type: 'ul'|'ol' }
-  let pendingTokens = []
+  let listStack: any[] = [] // 保存当前列表层级信息 { indent: number, type: 'ul'|'ol' }
+  let pendingTokens: any[] = []
 
-  function calculateIndent(line) {
-    const indentStr = line.match(/^\s*/)[0]
+  function calculateIndent(line: string) {
+    const indentStr = line.match(/^\s*/)?.[0] ?? ''
     return indentStr.replace(/\t/g, '    ').length //如果有制表符则统一为四个空格
   } //计算缩进
 
-  function generateListTokens(type, action, level) {
+  function generateListTokens(
+    type: string,
+    action: 'open' | 'close',
+    level: number,
+  ) {
     const tagMap = {
       open: { type: `${type}_open`, nesting: 1 },
       close: { type: `${type}_close`, nesting: -1 },
@@ -24,13 +28,13 @@ export function createListParser() {
     )
   }
   //解析列表项
-  function parseListItem(line) {
+  function parseListItem(line: string) {
     const text = line.replace(/^\s*[\*\-+]|\d+\.\s*/, '').trim()
     const tokens = []
 
     tokens.push(
       new Token({ type: 'list_item_open', tag: '<li>', nesting: 1 }),
-      new Token({ type: 'text', text: text, nesting: 0 }),
+      new Token({ type: 'text', tag: '', text: text, nesting: 0 }),
       new Token({ type: 'list_item_close', tag: '</li>', nesting: -1 }),
     )
 
@@ -38,7 +42,7 @@ export function createListParser() {
   }
 
   return {
-    parseLine(line) {
+    parseLine(line: string) {
       //判断是否为列表
       const listMatch = line.match(/^(\s*)([\*\-+]|\d+\.)\s/)
       if (!listMatch) return null

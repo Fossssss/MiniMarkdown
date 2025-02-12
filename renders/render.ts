@@ -1,5 +1,4 @@
-// 渲染器函数
-export function render(tokens) {
+export function render(tokens: any[]) {
   let html = ''
 
   tokens.forEach((token) => {

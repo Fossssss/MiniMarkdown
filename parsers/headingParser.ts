@@ -1,7 +1,7 @@
 // headingParser.js
-import Token from '../token.js'
+import Token from '../token'
 
-function createHeadingToken(type, level, content = '') {
+function createHeadingToken(type: string, level: number) {
   // 判断开标签还是闭标签来决定 tag
   const tag =
     type === 'heading_open'
@@ -15,13 +15,12 @@ function createHeadingToken(type, level, content = '') {
     tag: tag, // 根据 type 确定 tag
     nesting: type === 'heading_open' ? 1 : type === 'heading_close' ? -1 : 0,
     level: level,
-    text: content,
   })
 }
 
-export function parseHeadings(str) {
+export function parseHeadings(str: string) {
   const tokens = []
-  const headingRegex = /^(#+)\s*(.*)/
+  const headingRegex = /^(#+)\s*(.*)/ // 正则表达式
 
   const match = headingRegex.exec(str)
   if (!match) return []
@@ -31,12 +30,7 @@ export function parseHeadings(str) {
 
   tokens.push(
     createHeadingToken('heading_open', level),
-    new Token({
-      type: 'text',
-      tag: 'None',
-      nesting: 0,
-      text: content,
-    }),
+    new Token({ type: 'text', tag: '', nesting: 0, text: content }),
     createHeadingToken('heading_close', level),
   )
 
