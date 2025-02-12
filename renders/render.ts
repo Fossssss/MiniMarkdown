@@ -1,4 +1,5 @@
-export function render(tokens: any[]) {
+import Token from '../token'
+export function render(tokens: Token[]) {
   let html = ''
 
   tokens.forEach((token) => {
