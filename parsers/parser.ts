@@ -5,8 +5,9 @@ import { parseParagraphs } from './paragraphParser'
 import { createListParser } from './listParser'
 import { parseQuotes } from 'quoteParser.ts'
 import { parseHorizontalRules } from 'horizontalRuleParser.ts'
-import { parseBold } from 'bold italic 
-
+import { parseBold } from 'bold italic strikethrough Parser.ts'
+import { parseItalic } from 'bold italic strikethrough Parser.ts'
+import { parseStrikethrough } form 'bold italic strikethrough Parser.ts'
 
 export function parseMarkdown(str: string) {
   const tokens = []
