@@ -3,6 +3,10 @@ import Token from '../token'
 import { parseHeadings } from './headingParser'
 import { parseParagraphs } from './paragraphParser'
 import { createListParser } from './listParser'
+import { parseQuotes } from 'quoteParser.ts'
+import { parseHorizontalRules } from 'horizontalRuleParser.ts'
+import { parseBold } from 'bold italic 
+
 
 export function parseMarkdown(str: string) {
   const tokens = []
