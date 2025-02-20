@@ -32,11 +32,8 @@ export function createListParser() {
     const text = line.replace(/^\s*[\*\-+]|\d+\.\s*/, '').trim()
     const tokens = []
 
-    tokens.push(
-      new Token({ type: 'list_item_open', tag: '<li>', nesting: 1 }),
-      new Token({ type: 'text', tag: '', text: text, nesting: 0 }),
-      new Token({ type: 'list_item_close', tag: '</li>', nesting: -1 }),
-    )
+    tokens.push(new Token({ type: 'list_item_open', tag: '<li>', nesting: 1 })),
+    tokens.push(new Token({ type: 'text', tag: '', text: text, nesting: 0 }))
 
     return tokens
   }
@@ -62,13 +59,7 @@ export function createListParser() {
           break
         } else if (indent === current.indent) {
           // 同级处理
-          if (current.type !== listType) {
-            // 切换列表类型
-            generateListTokens(current.type, 'close', listStack.length - 1)
-            listStack.pop()
-            generateListTokens(listType, 'open', listStack.length)
-            listStack.push({ indent, type: listType })
-          }
+          output.push(new Token({ type: 'list_item_close', tag: '</li>', nesting: -1 }))
           break
         } else {
           // 缩进减少
