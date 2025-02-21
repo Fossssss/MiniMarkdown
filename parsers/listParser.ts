@@ -33,7 +33,7 @@ export function createListParser() {
     const tokens = []
 
     tokens.push(new Token({ type: 'list_item_open', tag: '<li>', nesting: 1 })),
-    tokens.push(new Token({ type: 'text', tag: '', text: text, nesting: 0 }))
+      tokens.push(new Token({ type: 'text', tag: '', text: text, nesting: 0 }))
 
     return tokens
   }
@@ -59,7 +59,9 @@ export function createListParser() {
           break
         } else if (indent === current.indent) {
           // 同级处理
-          output.push(new Token({ type: 'list_item_close', tag: '</li>', nesting: -1 }))
+          output.push(
+            new Token({ type: 'list_item_close', tag: '</li>', nesting: -1 }),
+          )
           break
         } else {
           // 缩进减少
