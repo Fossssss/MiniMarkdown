@@ -17,7 +17,8 @@ function createBlockquoteToken(type: string) {
 
 export function parseQuotes(str: string) {
   const tokens: Token[] = [];
-  const quoteRegex = /(>)\s*(.*)/g; 
+  // 修正正则表达式，匹配一个或者多个 > 符号
+  const quoteRegex = /(>+)\s*(.*)/g; 
 
   let match;
   while ((match = quoteRegex.exec(str)) !== null) {
